@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aadhaar Application Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      width: 500px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    img {
+      margin-top: 10px;
+      max-width: 100px;
+      display: none;
+    }
+    .message {
+      margin-top: 10px;
+      font-weight: bold;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Aadhaar Card Application</h2>
+  <form id="aadharForm">
+    <!-- Personal Info -->
+    <label>Full Name:</label>
+    <input type="text" id="name" required>
+
+    <label>Father's/Mother's Name:</label>
+    <input type="text" id="parentName" required>
+
+    <label>Date of Birth:</label>
+    <input type="date" id="dob" required>
+
+    <label>Gender:</label>
+    <select id="gender" required>
+      <option value="">--Select--</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+
+    <!-- Contact Info -->
+    <label>Mobile Number:</label>
+    <input type="tel" id="mobile" required>
+
+    <label>Email Address:</label>
+    <input type="email" id="email" required>
+
+    <!-- Address Info -->
+    <label>House/Flat Number:</label>
+    <input type="text" id="house" required>
+
+    <label>Street/Locality:</label>
+    <input type="text" id="street" required>
+
+    <label>City/Village:</label>
+    <input type="text" id="city" required>
+
+    <label>District:</label>
+    <input type="text" id="district" required>
+
+    <label>State:</label>
+    <input type="text" id="state" required>
+
+    <label>Pincode:</label>
+    <input type="text" id="pincode" required>
+
+    <!-- ID Proof -->
+    <label>Any ID Proof Number (like PAN/Voter ID):</label>
+    <input type="text" id="idproof" required>
+
+    <!-- Upload Photo -->
+    <label>Upload Your Passport Size Photo (Max 120 KB):</label>
+    <input type="file" id="photo" accept="image/*" required>
+    <img id="preview">
+    <div class="message" id="msg"></div>
+
+    <button type="submit">Submit Application</button>
+  </form>
+</div>
+
+<script>
+  let form = document.getElementById("aadharForm");
+  let photo = document.getElementById("photo");
+  let msg = document.getElementById("msg");
+  let preview = document.getElementById("preview");
+
+  photo.onchange = function () {
+    let file = photo.files[0];
+    if (file.size > 120000) {
+      msg.innerText = "Image size must be under 120 KB.";
+      preview.style.display = "none";
+      photo.value = "";
+    } else {
+      msg.innerText = "";
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+    }
+  }
+
+  form.onsubmit = function (e) {
+    e.preventDefault();
+    if (!photo.files[0]) {
+      msg.innerText = "Please upload a photo.";
+      return;
+    }
+    msg.style.color = "green";
+    msg.innerText = "Aadhaar Application Submitted Successfully!";
+    form.reset();
+    preview.style.display = "none";
+  }
+</script>
+
+</body>
+</html>
