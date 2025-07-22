@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Harry Potter Potions</title>
+  <style>
+    /* Page style */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: white;
+      font-family: Georgia, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    /* Potions container (no border) */
+    .potion-container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      margin-bottom: 30px;
+      animation: fadeIn 1s ease;
+    }
+
+    /* Potion buttons */
+    .potion-button {
+      background-color: #292929;
+      color: gold;
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s ease;
+      border: none;
+    }
+
+    .potion-button:hover {
+      background-color: gold;
+      color: black;
+      transform: scale(1.1);
+    }
+
+    /* Description box (only this has gold outline) */
+    .description-box {
+      width: 80%;
+      max-width: 800px;
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
+      transition: opacity 0.5s ease;
+      border: 2px solid gold; /*  Golden outline here */
+    }
+
+    .fade {
+      opacity: 0;
+    }
+
+    /* Fade animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Potion Buttons -->
+  <div class="potion-container">
+    <button class="potion-button" onclick="showInfo('polyjuice')">Polyjuice</button>
+    <button class="potion-button" onclick="showInfo('felix')">Felix Felicis</button>
+    <button class="potion-button" onclick="showInfo('amortentia')">Amortentia</button>
+  </div>
+
+  <!-- Description Box with Gold Border -->
+  <div class="description-box" id="descBox">
+     Click on a potion to reveal its magical effect...
+  </div>
+
+  <script>
+    // Potion details
+    const potions = {
+      polyjuice: "Polyjuice Potion lets you become someone else. Takes a month to brew!",
+      felix: " Felix Felicis gives you great luck for a short time. Use carefully!",
+      amortentia: " Amortentia is a powerful love potion. Smells unique to each person!"
+    };
+
+    // Show description
+    function showInfo(potionName) {
+      const desc = document.getElementById("descBox");
+      desc.classList.add("fade");
+      setTimeout(() => {
+        desc.innerText = potions[potionName];
+        desc.classList.remove("fade");
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
